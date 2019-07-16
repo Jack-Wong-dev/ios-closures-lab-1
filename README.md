@@ -343,6 +343,61 @@ b) ["odd", "even", "odd", "even", "odd", "even", "odd"]
 c) ["one ", "two ", "three ", "four four ", "five five five ", "six six zero zero ", "one zero seven six three "]
 ```
 ```swift
+//Q11
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+
+//11A
+func intsToStrings (arr: [Int], toString:(Int) -> String) -> [String] {
+    var theStrings = [String]()
+    for i in arr {
+        theStrings.append(toString(i))
+    }
+    return theStrings
+}
+
+//11B
+let asString: (Int) -> String = { String($0) }
+print(intsToStrings(arr: theInts, toString: asString))
+
+//11C
+let evenOdd: (Int) -> String = {
+    if $0 % 2 == 0 {
+        return "Even"
+    } else {
+        return "Odd"
+    }
+}
+print(intsToStrings(arr: theInts, toString: evenOdd))
+
+//11D
+
+let englishWords: (Int) -> String = {
+    let digitLetterDict: [Character:String] = ["1":"one", "2":"two", "3":"three", "4":"four", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine", "0":"zero"]
+    let stringNum = String($0)
+    var wordArray = [Character]()
+    var numberAsLetter: String = ""
+    var stringLetterNumber: String = ""
+
+    for char in stringNum {
+        wordArray.append(char)
+    }
+
+    for num in wordArray {
+        numberAsLetter = digitLetterDict[num]!
+        stringLetterNumber.append(contentsOf: "\(numberAsLetter) ")
+    }
+    return stringLetterNumber
+}
+
+//11E
+
+let a = intsToStrings(arr: theInts, toString: asString)
+let b = intsToStrings(arr: theInts, toString: evenOdd)
+let c = intsToStrings(arr: theInts, toString: englishWords)
+
+print(a)
+print(b)
+print(c)
 ```
 
 ## Question 12
