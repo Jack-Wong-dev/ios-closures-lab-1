@@ -537,11 +537,35 @@ a) Write a function called `myFilter` that takes an array of Doubles and a closu
 
 `let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, 5.2, 5.0]`
 
+```swift
+func myFilter(_ arrayOfDoubles:[Double], closure: (Double) -> Bool ) -> [Double]{
+    var result = [Double]()
+
+    for i in arrayOfDoubles{
+        if closure(i){
+            result.append(i)
+        }
+    }
+return result
+}
+```
+
 b) Define a closure assigned to a constant called `biggerThanTen` that takes a double and returns true if it is greater or equal to 10.0 and pass it to `myFilter`.
 
+```swift
+let biggerThanTen = { (x: Double) -> Bool in  x >= 10 }
+```
 c) Define a closure assigned to a constant called `wholeNumber` that takes a double and returns true if it is a whole number and pass it to `myFilter`.
 
+```swift
+let wholeNumber = { (x: Double) -> Bool in x == floor(x)}
+```
+
 d) Define a closure assigned to a constant called `justEven` that takes a double and returns true if the number to the left of the point is even and pass it to `myFilter`.
+
+```swift
+let justEven = { (x: Double) -> Bool in Int(x) % 2 == 0}
+```
 
 e. Use the built in filter method on `theDoubles` to recreate the answers for b, c and d.
 
@@ -563,4 +587,13 @@ c. [4, 58.65, 66]
 ```
 
 ```swift
+let biggerThanTen = theDoubles.filter { (x: Double) -> Bool in  x >= 10 }
+
+let wholeNumber = theDoubles.filter { (x: Double) -> Bool in x == floor(x)}
+
+let justEven = theDoubles.filter { (x: Double) -> Bool in Int(x) % 2 == 0}
+
+print(biggerThanTen)
+print(wholeNumber)
+print(justEven)
 ```
