@@ -17,6 +17,20 @@ applyKTimes(3) {
     print("Hello Closures!")
 }
 ```
+```swift
+//Q1 Solution
+func applyKTimes(_ K: Int, _ closure: () -> ()) {
+    for _ in 1...K {
+        closure()
+    }
+}
+
+applyKTimes(3) {
+    print("Hello Closures!")
+}
+
+```
+
 Output:
 
 ```swift
@@ -37,6 +51,13 @@ Input: `let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]`
 
 Expected values: `multiples = [3, 6, 9, 3, 12]`
 
+```swift
+//Q2
+let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]
+let multiples = numbers.filter { $0 % 3 == 0 }
+
+print(multiples)
+```
 
 ## Question 3
 
@@ -47,6 +68,19 @@ Input: `let numbers = [4, 7, 1, 9, 6, 5, 6, 9]`
 
 Output: `9`
 
+```swift
+
+let numbers = [4, 7, 1, 9, 6, 5, 6, 9]
+
+let largest = numbers.reduce(0, {
+    if $0 > $1{
+        return $0
+    }else{
+        return $1
+    }
+})
+
+```
 
 ## Question 4
 
@@ -57,6 +91,21 @@ Input: `let strings = ["We", "Heart", "Swift"]`
 
 Output: `"We Heart Swift"`
 
+```swift
+//Q4
+
+let strings = ["We", "Heart", "Swift"]
+
+let answer = strings.reduce(""){
+    if $0 == ""{
+        return $1
+    }else{
+        return $0 + " " + $1
+    }
+}
+
+print(answer)
+```
 
 ## Question 5
 
@@ -68,6 +117,23 @@ b. Use `sortedBy` to sort `cities` alphabetical order of the second character of
 
 c. Use `sortedBy` to sort `cities` in order of the length of the city name.
 
+```swift
+
+let cities = ["Shanghai", "Beijing", "Delhi", "Lagos", "Tianjin", "Karachi", "Karachi", "Tokyo", "Guangzhou", "Mumbai", "Moscow", "São Paulo"]
+
+//Use sortedBy to sort cities in alphabetical order.
+var answerA = cities.sorted(by: {$0 < $1})
+print(answerA)
+
+var answerB = cities.sorted(by: { s1, s2 in
+s1.dropFirst() < s2.dropFirst()
+})
+print(answerB)
+
+//5C: Use `sortedBy` to sort `cities` in order of the length of the city name.
+var answerC = cities.sorted(by: {$0.count < $1.count})
+print(answerC)
+```
 
 ## Question 6
 
@@ -77,6 +143,20 @@ a. Use `sortedBy` to sort `citiesWithPopulation` in ascending order of populatio
 
 b. Use `sortedBy` to sort `citiesWithPopulation` in reverse alphabetical order of the last character in the city name.
 
+```swift
+
+//Q6
+let citiesWithPopulation: [(String, Int)] = [("Shanghai", 24256800), ("Beijing", 21516000), ("Delhi", 16787941), ("Lagos", 16060303), ("Tianjin", 15200000), ("Karachi", 14910352), ("Karachi", 14160467), ("Tokyo", 13513734), ("Guangzhou", 13080500), ("Mumbai", 12442373), ("Moscow", 12380664), ("São Paulo", 12038175)]
+
+//6A:
+var answer6A = citiesWithPopulation.sorted(by: {$0.1 < $1.1} )
+print(answer6A)
+
+//6B:
+var answer6B = citiesWithPopulation.sorted(by: {String($0.0.reversed()) > String($1.0.reversed())})
+print(answer6B)
+
+```
 
 ## Question 7
 
@@ -97,6 +177,22 @@ numbers = [1, 2, 3, 5, 4, 6]
 // 6 has 4 divisors
 
 // [1, 5, 2, 3, 4, 6] would also have been a valid solution
+```
+```swift
+var answer7 = numbers.sorted(by: { x, y in
+    func numOfDivisors(_ num: Int) -> Int {
+        var counter = 0
+        for i in 1...num {
+            if num % i == 0 {
+                counter += 1
+            }
+        }
+    return counter
+    }
+    return numOfDivisors(x) < numOfDivisors(y)
+})
+
+print(answer7)
 ```
 
 
@@ -119,6 +215,36 @@ Input: `var numbers = [1, 2, 3, 4, 5, 6]`
 
 Output: `35 // 1 + 9 + 25 -> 35`
 
+```swift
+//Q8
+var numbers = [1, 2, 3, 4, 5, 6]
+
+
+//8A
+var answer8A = numbers.filter {$0 % 2 != 0}
+print(answer8A)
+
+//var answer = [Int]()
+//for i in numbers where i % 2 != 0{
+//    answer.append(i)
+//}
+
+
+//8B
+var answer8B = answer8A.map {$0 * $0}
+print(answer8B)
+
+
+//8C
+print(answer8B.reduce(0,{x, y in x + y}))
+
+```
+```swift
+//Q8 last part
+var answer = ((numbers.filter {$0 % 2 != 0}).map {$0*$0}).reduce(0, {x, y in x+y})
+
+print(answer)
+```
 
 ## Question 9
 
@@ -141,6 +267,18 @@ Output:
 9
 16
 ```
+```swift
+//Q9
+func forEach(_ array: [Int], _ closure: (Int) -> ()){
+    for i in array{
+        closure(i)
+    }
+}
+
+forEach([1, 2, 3, 4]) {
+print($0 * $0)
+}
+```
 
 ## Question 10
 
@@ -159,6 +297,20 @@ combineArrays(array1,array2) {
 
 Output: `[5,10,15,12]`
 
+```swift
+func combineArrays(_ array1: [Int],_ array2:[Int],_ closure:(Int,Int) -> Int)-> [Int]{
+    var answer = [Int]()
+    for i in 0...array1.count - 1  {
+        answer.append(closure(array1[i],array2[i]))
+    }
+    return answer
+}
+
+var array1 = [1,2,3,4]
+var array2 = [5,5,5,3]
+var result = combineArrays(array1,array2) { $0 * $1 }
+print(result)
+```
 
 ## Question 11
 
@@ -190,7 +342,8 @@ a) ["1", "2", "3", "44", "555", "6600", "10763"]
 b) ["odd", "even", "odd", "even", "odd", "even", "odd"]
 c) ["one ", "two ", "three ", "four four ", "five five five ", "six six zero zero ", "one zero seven six three "]
 ```
-
+```swift
+```
 
 ## Question 12
 
@@ -209,7 +362,8 @@ b) Sort `myArray` in descending order by defining the constant `descendingOrder`
 let mySecondSortedArray = myArray.sort(descendingOrder)
 let descendingOrder =
 ```
-
+```swift
+```
 
 ## Question 13
 
@@ -219,6 +373,30 @@ a) Sort `arrayOfArrays` in ascending order by the **3rd element** in each array.
 
 b) Sort `arrayOfArrays` in ascending order by the 3rd element in each array. Don't assume each array will have at least 3 elements. Put all arrays that have less than 3 elements at the end in any order.
 
+```swift
+//Q13
+//let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[1],[245,2,3,5,74],[2,3]]
+let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[245,2,3,5,74]]
+
+//13A
+var answerQ13A = arrayOfArrays.sorted(by: {$0[2] < $1[2]})
+
+print(answerQ13A)
+
+//13B
+var answerQ13B = arrayOfArrays.sorted(by: {
+    //check if both arrays have at least 3 elements
+    if $0.count >= 3 && $1.count >= 3{
+        $0[2] < $1[2]
+    }//Check if the current array has at least 3 elements
+    else if $0.count >= 3{
+        return true
+    }//Array that doesn't satisfy the prior 2 conditions goes last
+        return false
+})
+
+print(answerQ13B)
+```
 
 ## Question 14
 
@@ -261,6 +439,57 @@ b) Sort the string below in ascending order according the dictionary `letterValu
 
 `var codeStringTwo = "znwemnrfewpiqn"`
 
+```swift
+//14A Sort the string below in descending order according the dictionary letterValues:
+
+var codeString = "aldfjaekwjnfaekjnf"
+var codeArray = Array(codeString)
+
+let letterValues = [
+"a" : 54,
+"b" : 24,
+"c" : 42,
+"d" : 31,
+"e" : 35,
+"f" : 14,
+"g" : 15,
+"h" : 311,
+"i" : 312,
+"j" : 32,
+"k" : 93,
+"l" : 203,
+"m" : 212,
+"n" : 41,
+"o" : 102,
+"p" : 999,
+"q" : 1044,
+"r" : 404,
+"s" : 649,
+"t" : 414,
+"u" : 121,
+"v" : 838,
+"w" : 555,
+"x" : 1001,
+"y" : 123,
+"z" : 432
+]
+
+var sortedByDescending = String(codeArray.sorted(by: {(x: Character, y:Character)->Bool in letterValues
+    return x > y
+}))
+
+print(sortedByDescending)
+
+//14B Sort the string below in ascending order according the dictionary letterValues
+
+var sortedByAscending = String(codeArray.sorted(by: {(x: Character, y:Character)->Bool in letterValues
+    return x < y
+}))
+
+print(sortedByAscending)
+
+```
+
 ## Question 15
 
 ```swift
@@ -279,6 +508,27 @@ Sort the array of tuples by last name. Print the sorted array using string inter
 Bach, Johann S.
 Des Prez, Josquin
 ...etc
+```
+```swift
+//Q15 Solution
+
+let firstAndLastTuples = [("Johann S.", "Bach"),
+("Claudio", "Monteverdi"),
+("Duke", "Ellington"),
+("W. A.", "Mozart"),
+("Nicolai","Rimsky-Korsakov"),
+("Scott","Joplin"),
+("Josquin","Des Prez")]
+
+func sortByLastName(_ arrOfTuples: [(String, String)]) {
+    let sortedNames = arrOfTuples.sorted(by: { $0.1 < $1.1 })
+
+    for name in sortedNames {
+        print("\(name.1), \(name.0)")
+    }
+}
+
+sortByLastName(firstAndLastTuples)
 ```
 
 ## Question 16
@@ -310,4 +560,7 @@ output:
 a. [11.45, 58.65, 66]
 b. [4, 66, 5]
 c. [4, 58.65, 66]
+```
+
+```swift
 ```
