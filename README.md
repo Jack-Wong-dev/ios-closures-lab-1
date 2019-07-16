@@ -482,9 +482,13 @@ print(sortedByDescending)
 
 //14B Sort the string below in ascending order according the dictionary letterValues
 
-var sortedByAscending = String(codeArray.sorted(by: {(x: Character, y:Character)->Bool in letterValues
-    return x < y
-}))
+var codeStringTwo = "znwemnrfewpiqn"
+var codeArray2 = Array(codeStringTwo)
+
+var sortedByAscending = String(codeArray2.sorted(by: 
+    {(x: Character, y:Character)->Bool in letterValues
+        return x < y
+    }))
 
 print(sortedByAscending)
 
@@ -587,6 +591,7 @@ c. [4, 58.65, 66]
 ```
 
 ```swift
+//Q16E Solution
 let biggerThanTen = theDoubles.filter { (x: Double) -> Bool in  x >= 10 }
 
 let wholeNumber = theDoubles.filter { (x: Double) -> Bool in x == floor(x)}
