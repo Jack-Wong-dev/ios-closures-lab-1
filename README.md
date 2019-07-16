@@ -388,20 +388,15 @@ let englishWords: (Int) -> String = {
     }
     return stringLetterNumber
 }
+```
+```Swift
 
 //11E
 
-let a = intsToStrings(arr: theInts, toString: asString)
-let b = intsToStrings(arr: theInts, toString: evenOdd)
-let c = intsToStrings(arr: theInts, toString: englishWords)
+let a1 = theInts.map { String($0) }
+print(a1)
 
-print(a)
-print(b)
-print(c)
-
-//11E Solution using map
-print(theInts.map { String($0) })
-print(theInts.map { (x:Int) -> String in
+let b1 = theInts.map { (x:Int) -> String in
     if(x % 2 == 0) {
         return "Even"
     }
@@ -409,9 +404,9 @@ print(theInts.map { (x:Int) -> String in
         return "Odd"
     }
 }
-)
+print(b1)
 
-print(theInts.map { (x:Int) -> String in
+let c1 = theInts.map { (x:Int) -> String in
     let digitLetterDict: [Character:String] = ["1":"one", "2":"two", "3":"three", "4":"four", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine", "0":"zero"]
     let stringNum = String(x)
     var wordArray = [Character]()
@@ -426,9 +421,10 @@ print(theInts.map { (x:Int) -> String in
         numberAsLetter = digitLetterDict[num]!
         stringLetterNumber.append(contentsOf: "\(numberAsLetter) ")
     }
-    return stringLetterNumber}
-)
+    return stringLetterNumber
+}
 
+print(c1)
 ```
 
 
