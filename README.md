@@ -398,7 +398,41 @@ let c = intsToStrings(arr: theInts, toString: englishWords)
 print(a)
 print(b)
 print(c)
+
+//11E Solution using map
+print(theInts.map { String($0) })
+print(theInts.map { (x:Int) -> String in
+    if(x % 2 == 0) {
+        return "Even"
+    }
+    else{
+        return "Odd"
+    }
+}
+)
+
+print(theInts.map { (x:Int) -> String in
+    let digitLetterDict: [Character:String] = ["1":"one", "2":"two", "3":"three", "4":"four", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine", "0":"zero"]
+    let stringNum = String(x)
+    var wordArray = [Character]()
+    var numberAsLetter: String = ""
+    var stringLetterNumber: String = ""
+
+    for char in stringNum {
+        wordArray.append(char)
+    }
+
+    for num in wordArray {
+        numberAsLetter = digitLetterDict[num]!
+        stringLetterNumber.append(contentsOf: "\(numberAsLetter) ")
+    }
+    return stringLetterNumber}
+)
+
 ```
+
+
+
 
 ## Question 12
 
