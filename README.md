@@ -444,6 +444,13 @@ a) Sort `myArray` in ascending order by defining the constant `ascendingOrder` b
 let mySortedArray = myArray.sort(ascendingOrder)
 let ascendingOrder =
 ```
+```//Q12A Solution
+var myArray = [34,42,42,1,3,4,3,2,49]
+
+let ascendingOrder:(Int, Int) -> Bool = {$0 < $1}
+let mySortedArray = myArray.sorted(by: ascendingOrder)
+print(mySortedArray)
+```
 
 b) Sort `myArray` in descending order by defining the constant `descendingOrder` below.
 
@@ -452,6 +459,10 @@ let mySecondSortedArray = myArray.sort(descendingOrder)
 let descendingOrder =
 ```
 ```swift
+//Q12B Solution
+let descendingOrder: (Int, Int) -> Bool = {$0 > $1}
+let mySecondSortedArray = myArray.sorted(by: descendingOrder)
+print(mySecondSortedArray)
 ```
 
 ## Question 13
